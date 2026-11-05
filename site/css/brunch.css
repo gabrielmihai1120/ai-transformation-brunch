@@ -47,6 +47,7 @@
 
 .br-copy { display: flex; flex-direction: column; align-items: center; gap: calc(24 * var(--s)); margin-top: calc(44 * var(--s)); max-width: 100%; }
 .br-copy__lead { max-width: calc(916 * var(--s)); text-wrap: balance; }
+.br-nowrap { white-space: nowrap; }
 
 /* reservation card, after the AI Readiness hero: white card on a frosted panel, note strip below */
 .br-cta { display: flex; flex-direction: column; width: calc(916 * var(--s)); max-width: 100%; margin-top: calc(48 * var(--s)); border-radius: calc(24 * var(--s)); background: var(--surface-overlay-strong, #ffffff33); text-align: left; }
