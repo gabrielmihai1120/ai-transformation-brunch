@@ -1,0 +1,258 @@
+/* AI Transformation Brunch landing page. Page prefix: br-
+   Every length = design px * var(--s). Designed at 1512; tablet (< 1280) and mobile (< 768) rules at the end. */
+
+/* ---------- hero ---------- */
+.br-hero {
+  position: relative; overflow: hidden; isolation: isolate;
+  padding-block: calc(48 * var(--s)) calc(56 * var(--s));
+  background-color: #070066;
+  background-image:
+    /* blue taken from the fan illustration (#647ded) */
+    radial-gradient(48% 40% at 0% 0%, rgba(100, 125, 237, .85) 0%, rgba(100, 125, 237, .35) 45%, rgba(100, 125, 237, 0) 100%),
+    radial-gradient(54% 48% at 100% 24%, rgba(196, 88, 250, .8) 0%, rgba(208, 98, 255, 0) 100%),
+    radial-gradient(40% 40% at 0% 30%, rgba(140, 70, 225, .38) 0%, rgba(160, 80, 240, 0) 100%),
+    radial-gradient(42% 36% at 0% 80%, rgba(51, 150, 210, .32) 0%, rgba(51, 160, 216, 0) 100%),
+    radial-gradient(100% 60% at 50% 100%, rgba(118, 48, 214, .82) 0%, rgba(90, 34, 182, .52) 45%, rgba(80, 30, 170, 0) 100%),
+    radial-gradient(60% 40% at 85% 0%, rgba(0, 0, 50, .95) 0%, rgba(0, 0, 50, 0) 100%),
+    linear-gradient(180deg, #030052 0%, #06006a 30%, #0b0074 60%, #10006e 100%);
+}
+.br-hero__bg { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+/* the invite's fan, blurred into the glow behind the card */
+.br-hero__fan {
+  position: absolute; left: 50%; top: calc(150 * var(--s)); width: calc(980 * var(--s)) !important; height: auto; max-width: none !important;
+  transform: translateX(-50%) rotate(-90deg); filter: blur(calc(110 * var(--s))) saturate(1.35); opacity: .46; mix-blend-mode: screen;
+}
+/* the invite's ribbed-glass vertical lines, 48px pitch, recoloured for the dark ground */
+.br-hero__lines {
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(90deg,
+    rgba(255, 255, 255, 0) 0, rgba(0, 0, 30, .015) calc(46 * var(--s)), rgba(0, 0, 30, .035) calc(47 * var(--s)),
+    rgba(255, 255, 255, .025) calc(47 * var(--s)), rgba(255, 255, 255, .025) calc(48 * var(--s)));
+  background-position: 50% 0;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 72%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 72%, transparent 100%);
+}
+.br-hero__inner { display: flex; flex-direction: column; align-items: center; text-align: center; }
+
+.br-logo { display: inline-flex; line-height: 0; }
+
+/* invite card: fixed fanned state, the agenda page showing behind the front page */
+.br-invite { position: relative; width: calc(340 * var(--s)); aspect-ratio: 7 / 5; margin-top: calc(64 * var(--s)); }
+.br-invite__page {
+  position: absolute; inset: 0; width: 100% !important; height: 100%; object-fit: cover;
+  border-radius: calc(10 * var(--s)); box-shadow: 0 calc(24 * var(--s)) calc(60 * var(--s)) rgba(10, 0, 70, .4), 0 0 0 1px rgba(255, 255, 255, .25);
+  transform-origin: 50% 100%;
+}
+.br-invite__page--back { transform: translate(14%, -4%) rotate(7deg) scale(.86); }
+.br-invite__page--front { transform: translate(-6%, -1%) rotate(-4deg); }
+
+.br-copy { display: flex; flex-direction: column; align-items: center; gap: calc(24 * var(--s)); margin-top: calc(44 * var(--s)); max-width: 100%; }
+.br-copy__lead { max-width: calc(916 * var(--s)); text-wrap: balance; }
+
+/* reservation card, after the AI Readiness hero: white card on a frosted panel, note strip below */
+.br-cta { display: flex; flex-direction: column; width: calc(916 * var(--s)); max-width: 100%; margin-top: calc(48 * var(--s)); border-radius: calc(24 * var(--s)); background: var(--surface-overlay-strong, #ffffff33); text-align: left; }
+.br-signup { padding: calc(32 * var(--s)); background: var(--surface-default, #ffffff); border-radius: calc(24 * var(--s)); box-shadow: var(--shadow-deep, 0 16px 40px 0 #0000001a); }
+.br-signup__form { display: flex; flex-direction: column; align-items: flex-start; gap: calc(24 * var(--s)); }
+.br-signup__copy { display: flex; flex-direction: column; gap: calc(8 * var(--s)); }
+.br-signup__row { display: flex; align-items: flex-end; gap: calc(16 * var(--s)); width: 100%; }
+.br-signup__btn { flex: none; width: calc(238 * var(--s)); }
+/* the paragraph wraps at the email field's width (card inner width minus button and gap) */
+.br-signup__text { max-width: calc(598 * var(--s)); }
+.br-signup .nw-check { align-items: flex-start; }
+.br-signup .nw-check a { color: inherit; text-decoration: underline; text-underline-offset: .18em; text-decoration-thickness: 1px; }
+
+/* email field with a two-colour placeholder ("*" in Text/Danger), as on AI Readiness */
+.br-email { position: relative; display: block; flex: 1 1 0; min-width: 0; }
+.br-email .nw-field__control { width: 100%; }
+.br-email__ph {
+  position: absolute; left: calc(16 * var(--s)); right: calc(16 * var(--s)); top: 50%; transform: translateY(-50%); pointer-events: none;
+  font-family: var(--nw-body); font-weight: 600; font-size: calc(16 * var(--s)); line-height: calc(24 * var(--s));
+  color: var(--text-muted, #2e2b4180); white-space: nowrap;
+  line-height: calc(var(--lh-l) * var(--s)); overflow: hidden; text-overflow: ellipsis; text-align: left;
+}
+.br-email__req { color: var(--text-danger, #ff7855); }
+.br-email .nw-field__control:not(:placeholder-shown) ~ .br-email__ph { opacity: 0; }
+
+/* date, time and venue strip, as the AI Readiness feature strip */
+.br-features { list-style: none; margin: 0; padding: calc(24 * var(--s)); display: flex; gap: calc(24 * var(--s)); }
+.br-features li { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: calc(8 * var(--s)); text-align: center; color: var(--text-default, #ffffff); }
+.br-features .nw-body-m { color: var(--text-default, #ffffff); }
+/* when the box gets too narrow for each item to stay on one line (e.g. 768), the strip becomes a list, as on mobile */
+/* page-width query (a container on .br-cta would shrink every size inside it between 1513 and 1919px, since --s is measured from the nearest container) */
+@container nw (max-width: 885.98px) {
+  .br-features { flex-direction: column; gap: calc(16 * var(--s)); padding: calc(20 * var(--s)) calc(24 * var(--s)); }
+  .br-features li { flex-direction: row; gap: calc(12 * var(--s)); text-align: left; }
+}
+
+/* accepted: centred stack, filled check on top, narrower text group */
+.br-done { display: flex; flex-direction: column; align-items: center; gap: calc(16 * var(--s)); text-align: center; padding: calc(8 * var(--s)) 0; }
+.br-done__icon { display: inline-flex; flex: none; color: var(--surface-accent-green, #449c54); }
+/* UIcons solid-rounded check-circle (fi-sr-check-circle), inlined because the system font ships only the regular set */
+.br-done__icon svg { display: block; width: calc(40 * var(--s)); height: calc(40 * var(--s)); }
+.br-done .br-signup__copy { align-items: center; max-width: calc(560 * var(--s)); }
+.br-done .br-signup__copy p { text-wrap: balance; }
+@media (prefers-reduced-motion: no-preference) { .br-done { animation: br-pop .35s ease; } }
+@keyframes br-pop { from { opacity: 0; transform: translateY(calc(6 * var(--s))); } to { opacity: 1; transform: none; } }
+
+/* hosts: a title over two centred columns, at the foot of the hero */
+.br-details {
+  display: grid; grid-template-columns: repeat(2, minmax(0, calc(320 * var(--s)))); justify-content: center; column-gap: calc(64 * var(--s)); row-gap: calc(16 * var(--s));
+  max-width: 100%; margin-top: calc(64 * var(--s)); text-align: center;
+}
+.br-details__label { margin: 0 0 calc(8 * var(--s)); grid-column: 1 / -1; }
+.br-details__item { display: flex; flex-direction: column; align-items: center; gap: calc(4 * var(--s)); }
+.br-details__item p { margin: 0; }
+
+/* ---------- agenda ---------- */
+.br-bottom-cta { display: flex; justify-content: center; }
+.br-agenda { display: flex; flex-direction: column; gap: calc(var(--sec-gap) * var(--s)); }
+.br-title { display: flex; flex-direction: column; gap: calc(var(--g-xs) * var(--s)); max-width: calc(794 * var(--s)); }
+.br-title__lead { margin-top: calc(12 * var(--s)) !important; }
+.br-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: calc(var(--sec-gap) * var(--s)); align-items: center; }
+.br-col { display: flex; flex-direction: column; gap: calc(32 * var(--s)); min-width: 0; }
+
+/* schedule: a ruled list, time range over the activity, duration on the right (after an event-poster layout) */
+.br-sched { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--stroke-strong, #d3d5ea); }
+.br-sched__row {
+  display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "time" "what"; row-gap: calc(2 * var(--s));
+  align-items: end; padding: calc(16 * var(--s)) 0 calc(18 * var(--s)); border-bottom: 1px solid var(--stroke-strong, #d3d5ea);
+}
+.br-sched__time { grid-area: time; font-variant-numeric: tabular-nums; }
+.br-sched__what {
+  grid-area: what; font-family: var(--nw-body); font-weight: 600; font-size: calc(var(--fs-l) * var(--s)); line-height: calc(var(--lh-l) * var(--s));
+  color: var(--text-inverse, #2e2b41);
+}
+
+
+/* "You will leave with": white card in the printed invite's style (ribbed lines, fan in the corner), items on an arc */
+.br-lw {
+  position: relative; overflow: hidden; isolation: isolate; height: calc(560 * var(--s)); border-radius: calc(24 * var(--s));
+  width: calc(512 * var(--s)); max-width: 100%; align-self: flex-end;
+  background: var(--surface-default, #ffffff);
+  /* very soft lift so the card floats above the lavender */
+  box-shadow: 0 calc(2 * var(--s)) calc(6 * var(--s)) rgba(40, 26, 76, .04), 0 calc(24 * var(--s)) calc(56 * var(--s)) rgba(40, 26, 76, .09);
+}
+.br-lw__bg { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; border-radius: inherit; }
+/* the invite's ribbed-glass vertical lines, 48px pitch, tinted so they read on white */
+.br-lw__lines {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg, rgba(40, 26, 76, 0) 0, rgba(40, 26, 76, .012) calc(46 * var(--s)), rgba(40, 26, 76, .03) calc(47 * var(--s)),
+    rgba(255, 255, 255, 0) calc(47 * var(--s)), rgba(255, 255, 255, 0) calc(48 * var(--s)));
+  background-position: 50% 0;
+}
+/* the fan illustration rising from the bottom-right corner, as on the invite's front (no blur) */
+.br-lw__fan {
+  position: absolute; left: 84%; bottom: calc(-345 * var(--s)); width: calc(400 * var(--s)); height: calc(551 * var(--s));
+  transform: translateX(-50%) rotate(-90deg) scaleX(-1);
+}
+.br-lw__fan img { position: absolute; inset: 0; width: 100% !important; height: 100%; max-width: none !important; }
+.br-lw__title {
+  position: absolute; left: calc(32 * var(--s)); top: calc(32 * var(--s)); z-index: 2; margin: 0;
+  padding: calc(12 * var(--s)) calc(28 * var(--s)); border-radius: 500px; background: #0d0b1a; color: #ffffff;
+  font-family: var(--nw-body); font-weight: 600; font-size: calc(20 * var(--s)); line-height: calc(28 * var(--s));
+  box-shadow: 0 calc(12 * var(--s)) calc(30 * var(--s)) rgba(13, 11, 26, .18);
+}
+/* pivot to the left of the card; items sit on the curve but stay upright (after the Rational Lab layout) */
+.br-lw { --cx: calc(-200 * var(--s)); --cy: calc(318 * var(--s)); }
+/* the arc: a thin solid line with a small dark dot per item */
+.br-lw__arc {
+  position: absolute; left: var(--cx); top: var(--cy); width: calc(520 * var(--s)); height: calc(520 * var(--s)); transform: translate(-50%, -50%);
+  border-radius: 50%; border: 1px solid rgba(13, 11, 26, .2); box-sizing: border-box;
+}
+.br-lw__tick {
+  position: absolute; left: calc(260 * var(--s)); top: 0; width: calc(7 * var(--s)); height: calc(7 * var(--s)); transform: translate(-50%, -50%);
+  border-radius: 50%; background: #0d0b1a;
+}
+.br-lw__wheel {
+  list-style: none; margin: 0; padding: 0; position: absolute; left: var(--cx); top: var(--cy); width: 0; height: 0; }
+.br-lw__item { position: absolute; left: 0; top: 0; width: 0; height: 0; transform: rotate(calc(var(--a) * 1deg)); }
+.br-lw__row {
+  position: absolute; left: calc(300 * var(--s)); top: calc(-30 * var(--s)); height: calc(60 * var(--s));
+  transform-origin: 0 calc(30 * var(--s)); transform: rotate(calc(var(--a) * -1deg));
+  display: flex; align-items: center; gap: calc(16 * var(--s)); white-space: nowrap;
+}
+.br-lw__label { position: relative; display: inline-flex; padding: 0 calc(4 * var(--s)); }
+.br-lw__text {
+  position: relative; text-align: left; font-family: var(--nw-body); font-weight: 600; font-size: calc(16 * var(--s)); line-height: calc(22 * var(--s));
+  color: var(--text-inverse, #2e2b41);
+}
+.br-lw__chip {
+  position: relative; flex: none; display: inline-flex; align-items: center; justify-content: center;
+  width: calc(76 * var(--s)); height: calc(60 * var(--s)); border-radius: calc(22 * var(--s));
+  background: var(--surface-brand-subtle, #eeeeff); color: var(--surface-inverse, #281a4c);
+}
+.br-lw__chip .br-row__svg { position: relative; display: block; width: calc(28 * var(--s)); height: calc(28 * var(--s)); }
+
+/* ======================================================================
+   TABLET (768 to 1279, designed at 1024)
+   ====================================================================== */
+@container nw (max-width: 1279.98px) {
+  .br-hero { padding-block: calc(40 * var(--s)) calc(56 * var(--s)); }
+  .br-invite { width: calc(320 * var(--s)); margin-top: calc(56 * var(--s)); }
+  .br-hero__fan { width: calc(820 * var(--s)) !important; }
+  .br-copy__lead { max-width: calc(760 * var(--s)); }
+  .br-cta { width: calc(916 * var(--s)); }
+
+  /* two columns while each keeps about 400px; below that (e.g. 768) they stack, card centred */
+  .br-cols { display: flex; flex-wrap: wrap; gap: calc(48 * var(--s)); }
+  .br-col { flex: 1 1 calc(400 * var(--s)); }
+  .br-lw { align-self: center; width: 100%; max-width: calc(512 * var(--s)); }
+}
+
+/* small tablet (768 to 943): the two agenda columns have stacked, so the card fills the column */
+@container nw (max-width: 943.98px) {
+  .br-lw { max-width: none; }
+}
+
+/* ======================================================================
+   MOBILE (< 768, designed at 402)
+   ====================================================================== */
+@container nw (max-width: 767.98px) {
+  .br-hero { padding-block: calc(32 * var(--s)) calc(48 * var(--s)); }
+  .br-hero__fan { top: calc(120 * var(--s)); width: calc(560 * var(--s)) !important; filter: blur(calc(70 * var(--s))) saturate(1.35); }
+  .br-hero__lines { background-size: calc(36 * var(--s)) 100%; }
+  .br-invite { width: calc(248 * var(--s)); margin-top: calc(48 * var(--s)); }
+  .br-invite__page { border-radius: calc(7 * var(--s)); }
+  .br-copy { margin-top: calc(40 * var(--s)); gap: calc(16 * var(--s)); }
+  .br-copy__lead { text-wrap: pretty; }
+
+  /* reserve: stacked field and full-width button, as AI Readiness on mobile */
+  .br-cta { margin-top: calc(32 * var(--s)); }
+  .br-signup { padding: calc(24 * var(--s)) calc(16 * var(--s)); }
+  .br-signup__form { gap: calc(20 * var(--s)); }
+  .br-signup__copy { text-align: center; align-self: stretch; }
+  .br-signup__text { max-width: none; }
+  .br-signup__row { flex-direction: column; align-items: stretch; gap: calc(12 * var(--s)); }
+  .br-email { flex: none; }
+  .br-signup__btn { width: 100%; }
+  .br-features { flex-direction: column; gap: calc(16 * var(--s)); padding: calc(20 * var(--s)) calc(24 * var(--s)); }
+  .br-features li { flex-direction: row; gap: calc(12 * var(--s)); text-align: left; }
+  .br-done .br-signup__copy { max-width: none; }
+
+  /* hosts: one per row */
+  .br-details { grid-template-columns: minmax(0, 1fr); row-gap: calc(20 * var(--s)); margin-top: calc(48 * var(--s)); width: 100%; }
+  .br-details__label { margin-bottom: 0; }
+
+  /* agenda */
+  .br-cols { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: calc(40 * var(--s)); }
+  .br-col { flex: none; gap: calc(24 * var(--s)); }
+  .br-sched__what { font-size: calc(18 * var(--s)); line-height: calc(26 * var(--s)); }
+  .br-sched__row { padding: calc(14 * var(--s)) 0 calc(16 * var(--s)); }
+
+  /* "You will leave with": same arc, tightened to the 370 column */
+  .br-lw { max-width: none; height: calc(440 * var(--s)); --cx: calc(-200 * var(--s)); --cy: calc(262 * var(--s)); }
+  .br-lw__title { left: calc(20 * var(--s)); top: calc(20 * var(--s)); padding: calc(10 * var(--s)) calc(20 * var(--s)); font-size: calc(16 * var(--s)); line-height: calc(24 * var(--s)); }
+  .br-lw__arc { width: calc(480 * var(--s)); height: calc(480 * var(--s)); }
+  .br-lw__tick { left: calc(240 * var(--s)); width: calc(6 * var(--s)); height: calc(6 * var(--s)); }
+  .br-lw__row { left: calc(272 * var(--s)); top: calc(-24 * var(--s)); height: calc(48 * var(--s)); transform-origin: 0 calc(24 * var(--s)); gap: calc(12 * var(--s)); }
+  .br-lw__chip { width: calc(60 * var(--s)); height: calc(48 * var(--s)); border-radius: calc(18 * var(--s)); }
+  .br-lw__chip .br-row__svg { width: calc(24 * var(--s)); height: calc(24 * var(--s)); }
+  .br-lw__text { font-size: calc(15 * var(--s)); line-height: calc(20 * var(--s)); }
+  .br-lw__fan { left: 88%; bottom: calc(-290 * var(--s)); width: calc(300 * var(--s)); height: calc(413 * var(--s)); }
+
+  .br-bottom-cta .nw-btn { width: 100%; justify-content: center; }
+}
+
+/* ---------- form validation message (added for the build; not in the canvas design) ---------- */
+.br-signup__error { margin: 0; color: var(--text-danger, #e5484d); }
+.br-signup__error[hidden] { display: none; }
+.br-signup__btn[aria-busy="true"] { opacity: .7; pointer-events: none; }
