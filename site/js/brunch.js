@@ -65,7 +65,36 @@
 
     button.setAttribute('aria-busy', 'true');
     submitRsvp({ email: email.value, consent: true, event: 'ai-transformation-brunch-2026-11-17' })
-      .then(function () { window.location.href = CONFIRMATION_URL; })
+      .then(showAccepted)
       .catch(function () { button.removeAttribute('aria-busy'); showError(MESSAGES.failed); });
   });
+
+  /* Success: switch this page to its "accepted" state in place (same content as confirmed.html),
+     keeping the reserve box where it was on screen so nothing jumps. */
+  function showAccepted() {
+    var copyTpl = document.getElementById('rsvp-done-copy');
+    var boxTpl = document.getElementById('rsvp-done-box');
+    var heroCopy = document.querySelector('.br-copy');
+    var box = document.getElementById('br-reserve');
+    if (!copyTpl || !boxTpl || !heroCopy || !box) { window.location.href = CONFIRMATION_URL; return; }
+
+    var topBefore = box.getBoundingClientRect().top;
+    var done = boxTpl.content.firstElementChild.cloneNode(true);
+    heroCopy.replaceChildren(copyTpl.content.cloneNode(true));
+    form.replaceWith(done);
+    var bottomCta = document.querySelector('.br-bottom-cta');
+    if (bottomCta) bottomCta.remove();
+
+    // The new headline text is shorter, which pulls the box up; scroll by the same amount to hold it still.
+    var shift = box.getBoundingClientRect().top - topBefore;
+    if (shift) window.scrollBy({ top: shift, behavior: 'instant' });
+
+    // Move focus off the removed button onto the message, so keyboard and screen-reader users land on it.
+    done.setAttribute('tabindex', '-1');
+    done.focus({ preventScroll: true });
+
+    // A reload, or a shared link, now shows the confirmation too.
+    document.title = 'Invitation accepted · ' + document.title;
+    try { history.replaceState(null, '', CONFIRMATION_URL); } catch (err) { /* file:// and the like */ }
+  }
 })();

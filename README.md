@@ -4,7 +4,8 @@ Invitation landing page for Neurony's **AI Transformation Brunch** (17 November 
 Plain HTML, CSS and a little JavaScript. No build step and no dependencies. It's published with GitHub Pages.
 
 - `index.html`: the invite with the "Reserve your place" form
-- `confirmed.html`: the same page after someone accepts ("Invitation accepted")
+- `confirmed.html`: the "Invitation accepted" state. After a successful RSVP the invite page switches to it in place
+  (no page load) and updates the address to `confirmed.html`, so a reload shows it too.
 
 ## Folder layout
 
@@ -39,7 +40,7 @@ Then open http://localhost:4173. `npx serve site` works too.
 
 Replace the body of `submitRsvp(data)` in [site/js/brunch.js](site/js/brunch.js). It receives
 `{ email, consent: true, event: 'ai-transformation-brunch-2026-11-17' }` and must return a Promise.
-Resolve it to show the confirmation page. Reject it to show "Something went wrong…" and let the visitor retry.
+Resolve it to switch the page to the confirmation. Reject it to show "Something went wrong…" and let the visitor retry.
 
 GitHub Pages can't receive form posts itself, so point it at an outside service. Two free options:
 

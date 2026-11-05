@@ -86,6 +86,7 @@
 
 /* accepted: centred stack, filled check on top, narrower text group */
 .br-done { display: flex; flex-direction: column; align-items: center; gap: calc(16 * var(--s)); text-align: center; padding: calc(8 * var(--s)) 0; }
+.br-done:focus { outline: none; } /* focused by script when it replaces the form; not a control */
 .br-done__icon { display: inline-flex; flex: none; color: var(--surface-accent-green, #449c54); }
 /* UIcons solid-rounded check-circle (fi-sr-check-circle), inlined because the system font ships only the regular set */
 .br-done__icon svg { display: block; width: calc(40 * var(--s)); height: calc(40 * var(--s)); }
